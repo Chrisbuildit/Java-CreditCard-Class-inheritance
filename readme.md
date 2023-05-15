@@ -41,32 +41,32 @@ mvnw.cmd clean compile exec:java
 
 Een Customer moet natuurlijk kunnen betalen! Dit kan heel goed met een creditcard...
 
-1. Maak een klasse `CreditCard` en geef deze een private property `int debt`, geef deze getters en setters en een constructor waarin deze property is opgenomen.
-2. Voeg nu een private property `creditcard` van type `CreditCard` toe aan de `Customer` klasse, maak hier ook getters en setters voor en voeg de property toe aan beide constructors.
-3. Pas ook de main methode aan om de 2 customers een `CreditCard` te geven.
+1. Maak een klasse `CreditCards` en geef deze een private property `int debt`, geef deze getters en setters en een constructor waarin deze property is opgenomen.
+2. Voeg nu een private property `creditcard` van type `CreditCards` toe aan de `Customer` klasse, maak hier ook getters en setters voor en voeg de property toe aan beide constructors.
+3. Pas ook de main methode aan om de 2 customers een `CreditCards` te geven.
 
 Deze aanroep zou er dan ongeveer zo uit moeten zien:
-`Customer customer = new Customer("Frodo", "Balings", new CreditCard(100));`
+`Customer customer = new Customer("Frodo", "Balings", new CreditCards(100));`
 
-4. Voeg een methode `void pay(int amount)` toe aan de CreditCard klasse. Deze methode moet de `CreditCard` een nieuw bedrag geven gelijk aan het oude bedrag + amount (een CreditCard verzamelt namelijk schuld). Je kan nu in de main methode een betaling doen door
+4. Voeg een methode `void pay(int amount)` toe aan de CreditCards klasse. Deze methode moet de `CreditCards` een nieuw bedrag geven gelijk aan het oude bedrag + amount (een CreditCards verzamelt namelijk schuld). Je kan nu in de main methode een betaling doen door
 `customer.getCreditCard().pay(10)` te doen, en de huidige schuld kun je printen door `System.out.println(customer.getCreditCard().getDebt());` te doen.
 
 ### Opdracht 3
 
 Er zijn 2 grote creditcard maatschappijen in de wereld, namelijk VisaCard en MasterCard. Wanneer we willen implementeren, zullen we hiervoor overerving moeten gebruiken. 
-1. Maak een nieuwe klasse `VisaCard` aan en zorg dat deze van de klasse `CreditCard` extends;
-2. Je ziet dat de code niet compileert, dit komt doordat de super klasse (CreditCard) een constructor heeft, dus moet de subklasse VisaCard dit ook hebben.
+1. Maak een nieuwe klasse `VisaCard` aan en zorg dat deze van de klasse `CreditCards` extends;
+2. Je ziet dat de code niet compileert, dit komt doordat de super klasse (CreditCards) een constructor heeft, dus moet de subklasse VisaCard dit ook hebben.
 Dit is op te lossen door een constructor aan `VisaCard` toe te voegen: 
 ```
 public VisaCard(int debt) {
     super(debt);
 }
 ```
-3. We hebben nu een klasse `VisaCard`, maak nu ook een klasse `MasterCard` aan en laat deze ook `CreditCard` extenden.
-4. Nu we ervoor hebben gekozen om voor alle creditcards een implementatie te maken heeft het geen zin meer om toe te staan dat er een instantie van de super class `CreditCard` gemaakt kan worden. Maak deze klasse `abstract`.
-5. We zien nu in Main dat we geen nieuwe instantie meer kunnen maken van CreditCard. Geef daarom éen customer een VisaCard en de andere een MasterCard.
+3. We hebben nu een klasse `VisaCard`, maak nu ook een klasse `MasterCard` aan en laat deze ook `CreditCards` extenden.
+4. Nu we ervoor hebben gekozen om voor alle creditcards een implementatie te maken heeft het geen zin meer om toe te staan dat er een instantie van de super class `CreditCards` gemaakt kan worden. Maak deze klasse `abstract`.
+5. We zien nu in Main dat we geen nieuwe instantie meer kunnen maken van CreditCards. Geef daarom éen customer een VisaCard en de andere een MasterCard.
 
-Doordat de methode `pay` op `CreditCard` zit, en `VisaCard` en `MasterCard` beide hiervan overerven, hebben ze ook beide automatisch de methode `pay` tot hun beschikking! Je zult daarom ook zien dat `customer.getCreditCard().pay(10)` nog steeds prima werkt.
+Doordat de methode `pay` op `CreditCards` zit, en `VisaCard` en `MasterCard` beide hiervan overerven, hebben ze ook beide automatisch de methode `pay` tot hun beschikking! Je zult daarom ook zien dat `customer.getCreditCard().pay(10)` nog steeds prima werkt.
 
 ### Opdracht 4
 
@@ -79,6 +79,6 @@ public void pay(int amount) {
 }
 ```
 
-1. De aanroep naar `super.pay()` betekend hier dat de methode `pay` van de super klasse (CreditCard) wordt aangeroepen. Zorg er hier voor dat het amount 10% lager wordt (door bijvoorbeeld (int)(amount * 0.9) te doen).
+1. De aanroep naar `super.pay()` betekend hier dat de methode `pay` van de super klasse (CreditCards) wordt aangeroepen. Zorg er hier voor dat het amount 10% lager wordt (door bijvoorbeeld (int)(amount * 0.9) te doen).
 
 Je zult nu zien dat als je in Main zowel `customer` als `customer2` beide een andere creditcard geeft met een amount 0, en op beide `pay` aanroept met het bedrag 100, de schuld op beide kaarten nu anders zal zijn.
